@@ -4,6 +4,12 @@ export ZSH="${HOME}/.oh-my-zsh"
 # If you come from bash you might have to change your $PATH.
 export PATH="/usr/local/sbin:$PATH"
 export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+export PATH="/usr/local/opt/findutils/libexec/gnubin:$PATH"
+export PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"
+export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
+export PATH="/usr/local/opt/gnu-indent/libexec/gnubin:$PATH"
+export PATH="/usr/local/opt/gnu-which/bin:$PATH"
+export PATH="/usr/local/opt/gnu-getopt/bin:$PATH"
 export PATH="/usr/local/opt/grep/libexec/gnubin:$PATH"
 export PATH="/usr/local/opt/ruby/bin:$PATH"
 export PATH="/usr/local/opt/unzip/bin:$PATH"
@@ -14,17 +20,7 @@ export PATH="${HOME}/.bin:$PATH"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="powerlevel10k/powerlevel10k"
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir_writable dir vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator background_jobs command_execution_time)
-POWERLEVEL9K_MODE='nerdfont-complete'
-POWERLEVEL9K_SHORTEN_DIR_LENGTH=1
-POWERLEVEL9K_SHORTEN_DELIMITER=""
-POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_right"
-POWERLEVEL9K_STATUS_CROSS="true"
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-# source "${HOME}/.p10k.zsh"
+# ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -90,55 +86,15 @@ ZSH_CUSTOM="${ZSH}/custom"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(
-	auto-color-ls
-	auto-notify
-	autojump
-	autoupdate
-	colorize
-	copyzshell
-	dotfiles
-	fast-syntax-highlighting
-	forgit
-	git-prune
-	history-substring-search
-	oh-my-matrix
-	solarized-man
-	startup-timer
-	sublime
-	zsh-256color
-	zsh-autopair
-	zsh-autosuggestions
-	zsh-completions
-	zsh-crypto-prices
-	zsh-dircolors-solarized
-	zsh-ipip
-)
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=10'
-
-### Fix slowness of pastes with zsh-syntax-highlighting
-pasteinit() {
-  OLD_SELF_INSERT=${${(s.:.)widgets[self-insert]}[2,3]}
-  zle -N self-insert url-quote-magic
-}
-
-pastefinish() {
-  zle -N self-insert $OLD_SELF_INSERT
-}
-zstyle :bracketed-paste-magic paste-init pasteinit
-zstyle :bracketed-paste-magic paste-finish pastefinish
-### Fix slowness of pastes
-
-# Disable paste highlighting
-zle_highlight+=(paste:none)
+# plugins=()
 
 source $ZSH/oh-my-zsh.sh
-AUTO_NOTIFY_IGNORE+=(vi sleep ping)
 
 ### User configuration
 # export TERM="xterm-256color"
 
-export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:/usr/local/lib/ruby/gems/2.6.0/share/man:$MANPATH"
+export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+export MANPATH="/usr/local/lib/ruby/gems/2.6.0/share/man:$MANPATH"
 
 export GOPATH="${HOME}/.go"
 export PATH="$GOPATH/bin:/usr/local/opt/go/libexec/bin:$PATH"
@@ -176,8 +132,61 @@ export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
 # eval "$(thefuck --alias)"
 # eval "$(pyenv init -)"
 
-# ### Added by Zplugin's installer
-# source '/Users/moby.huang/.zplugin/bin/zplugin.zsh'
-# autoload -Uz _zplugin
-# (( ${+_comps} )) && _comps[zplugin]=_zplugin
-# ### End of Zplugin's installer chunk
+source '/Users/moby.huang/.zplugin/bin/zplugin.zsh'
+autoload -Uz _zplugin
+(( ${+_comps} )) && _comps[zplugin]=_zplugin
+
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir_writable dir vcs)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator background_jobs command_execution_time)
+POWERLEVEL9K_MODE='nerdfont-complete'
+POWERLEVEL9K_SHORTEN_DIR_LENGTH=1
+POWERLEVEL9K_SHORTEN_DELIMITER=""
+POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_right"
+POWERLEVEL9K_VCS_HIDE_TAGS="true"
+POWERLEVEL9K_STATUS_CROSS="true"
+zplg ice wait'!'; zplg load "romkatv/powerlevel10k"
+# Disable vcs_info in HOME directory
+# zstyle ':vcs_info:*' disable-patterns "${(b)HOME}(|/*)"
+
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=10'
+zplg ice silent wait atload'_zsh_autosuggest_start'; zplg load zsh-users/zsh-autosuggestions
+
+# Disable paste highlighting
+zle_highlight+=(paste:none)
+### Fix slowness of pastes with zsh-syntax-highlighting
+pasteinit() {
+  OLD_SELF_INSERT=${${(s.:.)widgets[self-insert]}[2,3]}
+  zle -N self-insert url-quote-magic
+}
+
+pastefinish() {
+  zle -N self-insert $OLD_SELF_INSERT
+}
+zstyle :bracketed-paste-magic paste-init pasteinit
+zstyle :bracketed-paste-magic paste-finish pastefinish
+### Fix slowness of pastes
+zplg load zdharma/fast-syntax-highlighting
+
+AUTO_NOTIFY_IGNORE+=(vi sleep ping)
+zplg load MichaelAquilina/zsh-auto-notify
+
+zplg light gretzky/auto-color-ls
+zplg light zpm-zsh/colorize
+zplg light rutchkiwi/copyzshell
+zplg light vladmyr/dotfiles-plugin
+zplg light wfxr/forgit
+zplg light diazod/git-prune
+zplg load zdharma/history-search-multi-word
+zplg light zlsun/solarized-man
+zplg light valentinocossar/sublime
+zplg light molovo/tipz
+zplg light chrissicool/zsh-256color
+zplg load hlissner/zsh-autopair
+zplg load zsh-users/zsh-completions
+zplg light vincentdnl/zsh-crypto-prices
+zplg light joel-porquet/zsh-dircolors-solarized
+zplg load zsh-users/zsh-history-substring-search
+zplg light SukkaW/zsh-ipip
+zplg load paulmelnikow/zsh-startup-timer
+
+zplg snippet OMZ::plugins/autojump/autojump.plugin.zsh
