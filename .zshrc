@@ -145,8 +145,6 @@ POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_right"
 POWERLEVEL9K_VCS_HIDE_TAGS="true"
 POWERLEVEL9K_STATUS_CROSS="true"
 zplg ice wait'!'; zplg load "romkatv/powerlevel10k"
-# Disable vcs_info in HOME directory
-# zstyle ':vcs_info:*' disable-patterns "${(b)HOME}(|/*)"
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=10'
 zplg ice silent wait atload'_zsh_autosuggest_start'; zplg load zsh-users/zsh-autosuggestions
