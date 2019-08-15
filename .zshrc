@@ -123,6 +123,7 @@ source "${HOME}/.aliases"
 source "${HOME}/.iterm2_shell_integration.zsh"
 
 export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
+export BAT_THEME=TwoDark
 
 # Source iTerm2 tab color functions and set the color on startup
 # source "${HOME}/.iterm2-tab-color/functions.sh"
