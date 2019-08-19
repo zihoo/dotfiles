@@ -169,7 +169,8 @@ zplg load zdharma/fast-syntax-highlighting
 AUTO_NOTIFY_IGNORE+=(vi sleep ping)
 zplg load MichaelAquilina/zsh-auto-notify
 
-zplg light gretzky/auto-color-ls
+zplg ice silent wait; zplg light gretzky/auto-color-ls
+
 zplg light zpm-zsh/colorize
 zplg light rutchkiwi/copyzshell
 zplg light vladmyr/dotfiles-plugin
