@@ -181,7 +181,7 @@ zinit light z-shell/zsh-diff-so-fancy
 
 zinit light zpm-zsh/colorize
 zinit light rutchkiwi/copyzshell
-zinit light vladmyr/dotfiles-plugin
+# zinit light vladmyr/dotfiles-plugin
 zinit light wfxr/forgit
 zinit light diazod/git-prune
 zinit load zdharma/history-search-multi-word

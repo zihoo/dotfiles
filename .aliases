@@ -21,4 +21,4 @@ alias curlperf='curl -w "@/Users/hhuzhi/.curl-format" -o /dev/null -s'
 alias wakeupbaymax='ssh admin@home.zihoo.me "ether-wake -i br0 70:85:C2:42:36:02"'
 alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1])"'
 alias urldecode='python -c "import sys, urllib as ul; print ul.unquote_plus(sys.argv[1])"'
-
+alias dotupload='git commit -am "$(date +%Y.%m.%d_%H:%M:%S) from $(whoami)@$(hostname)" && git push'
