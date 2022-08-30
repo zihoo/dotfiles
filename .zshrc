@@ -2,18 +2,21 @@
 export ZSH="${HOME}/.oh-my-zsh"
 
 # If you come from bash you might have to change your $PATH.
-export PATH="/usr/local/sbin:$PATH"
-export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-export PATH="/usr/local/opt/findutils/libexec/gnubin:$PATH"
-export PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"
-export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
-export PATH="/usr/local/opt/gnu-indent/libexec/gnubin:$PATH"
-export PATH="/usr/local/opt/gnu-which/bin:$PATH"
-export PATH="/usr/local/opt/gnu-getopt/bin:$PATH"
-export PATH="/usr/local/opt/grep/libexec/gnubin:$PATH"
-export PATH="/usr/local/opt/ruby/bin:$PATH"
-export PATH="/usr/local/opt/unzip/bin:$PATH"
-export PATH="${HOME}/.rvm/bin:$PATH"
+export PATH="/opt/homebrew/bin:$PATH"
+export PATH="/opt/homebrew/sbin:$PATH"
+export PATH="/opt/homebrew/opt/binutils/bin:$PATH"
+export PATH="/opt/homebrew/opt/curl/bin:$PATH"
+export PATH="/opt/homebrew/opt/unzip/bin:$PATH"
+export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+export PATH="/opt/homebrew/opt/python@3.10/bin:$PATH"
+export PATH="/opt/homebrew/opt/grep/libexec/gnubin:$PATH"
+export PATH="/opt/homebrew/opt/gnu-getopt/bin:$PATH"
+export PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
+export PATH="/opt/homebrew/opt/gnu-indent/libexec/gnubin:$PATH"
+export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
+export PATH="/opt/homebrew/opt/findutils/libexec/gnubin:$PATH"
+export PATH="/opt/homebrew/opt/inetutils/libexec/gnubin:$PATH"
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 export PATH="${HOME}/.bin:$PATH"
 
 # Set name of the theme to load --- if set to "random", it will
@@ -45,7 +48,7 @@ DISABLE_UPDATE_PROMPT="true"
 # export UPDATE_ZSH_DAYS=13
 
 # Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS=true
+DISABLE_MAGIC_FUNCTIONS=true
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -93,13 +96,12 @@ source $ZSH/oh-my-zsh.sh
 ### User configuration
 # export TERM="xterm-256color"
 
-export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
-export MANPATH="/usr/local/lib/ruby/gems/2.6.0/share/man:$MANPATH"
+export MANPATH="/opt/homebrew/opt/coreutils/libexec/gnuman:$MANPATH"
 
 export GOPATH="${HOME}/.go"
-export PATH="$GOPATH/bin:/usr/local/opt/go/libexec/bin:$PATH"
+export PATH="$GOPATH/bin:$PATH"
 
-export GROOVY_HOME="/usr/local/opt/groovy/libexec"
+export GROOVY_HOME="/opt/homebrew/opt/groovy/libexec"
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -113,7 +115,8 @@ export GROOVY_HOME="/usr/local/opt/groovy/libexec"
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
-export CFLAGS="-I/usr/local/include -L/usr/local/lib"
+export ARCHFLAGS='-arch arm64'
+export CFLAGS="-I/opt/homebrew/include -L/opt/homebrew/lib"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -122,7 +125,8 @@ export CFLAGS="-I/usr/local/include -L/usr/local/lib"
 source "${HOME}/.aliases"
 source "${HOME}/.iterm2_shell_integration.zsh"
 
-export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
+export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/bottles
+export HOMEBREW_NO_AUTO_UPDATE=true
 export BAT_THEME=TwoDark
 
 # Source iTerm2 tab color functions and set the color on startup
@@ -133,9 +137,10 @@ export BAT_THEME=TwoDark
 # eval "$(thefuck --alias)"
 # eval "$(pyenv init -)"
 
-source '/Users/moby.huang/.zplugin/bin/zplugin.zsh'
-autoload -Uz _zplugin
-(( ${+_comps} )) && _comps[zplugin]=_zplugin
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+source "${ZINIT_HOME}/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
 
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir_writable dir vcs)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator background_jobs command_execution_time)
@@ -145,10 +150,10 @@ POWERLEVEL9K_SHORTEN_DELIMITER=""
 POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_right"
 POWERLEVEL9K_VCS_HIDE_TAGS="true"
 POWERLEVEL9K_STATUS_CROSS="true"
-zplg ice wait'!'; zplg load "romkatv/powerlevel10k"
+zinit load "romkatv/powerlevel10k"
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=10'
-zplg ice silent wait atload'_zsh_autosuggest_start'; zplg load zsh-users/zsh-autosuggestions
+zinit ice silent wait atload'_zsh_autosuggest_start'; zinit load zsh-users/zsh-autosuggestions
 
 # Disable paste highlighting
 zle_highlight+=(paste:none)
@@ -164,29 +169,41 @@ pastefinish() {
 zstyle :bracketed-paste-magic paste-init pasteinit
 zstyle :bracketed-paste-magic paste-finish pastefinish
 ### Fix slowness of pastes
-zplg load zdharma/fast-syntax-highlighting
+zinit load zdharma/fast-syntax-highlighting
 
-AUTO_NOTIFY_IGNORE+=(vi sleep ping)
-zplg load MichaelAquilina/zsh-auto-notify
+# AUTO_NOTIFY_IGNORE+=(docker gping man mpv ncdu ping sleep vi vim)
+# zinit load MichaelAquilina/zsh-auto-notify
 
-zplg ice silent wait; zplg light gretzky/auto-color-ls
+# zinit ice silent wait; zinit light gretzky/auto-color-ls
 
-zplg light zpm-zsh/colorize
-zplg light rutchkiwi/copyzshell
-zplg light vladmyr/dotfiles-plugin
-zplg light wfxr/forgit
-zplg light diazod/git-prune
-zplg load zdharma/history-search-multi-word
-zplg light zlsun/solarized-man
-zplg light valentinocossar/sublime
-zplg light molovo/tipz
-zplg light chrissicool/zsh-256color
-zplg load hlissner/zsh-autopair
-zplg load zsh-users/zsh-completions
-zplg light vincentdnl/zsh-crypto-prices
-zplg light joel-porquet/zsh-dircolors-solarized
-zplg load zsh-users/zsh-history-substring-search
-zplg light SukkaW/zsh-ipip
-zplg load paulmelnikow/zsh-startup-timer
+zinit ice as"program" pick"bin/git-dsf"
+zinit light z-shell/zsh-diff-so-fancy
 
-zplg snippet OMZ::plugins/autojump/autojump.plugin.zsh
+zinit light zpm-zsh/colorize
+zinit light rutchkiwi/copyzshell
+zinit light vladmyr/dotfiles-plugin
+zinit light wfxr/forgit
+zinit light diazod/git-prune
+zinit load zdharma/history-search-multi-word
+zinit light zlsun/solarized-man
+zinit light valentinocossar/sublime
+zinit light chrissicool/zsh-256color
+zinit load hlissner/zsh-autopair
+zinit load zsh-users/zsh-completions
+zinit light vincentdnl/zsh-crypto-prices
+zinit light joel-porquet/zsh-dircolors-solarized
+zinit load zsh-users/zsh-history-substring-search
+zinit light SukkaW/zsh-ipip
+# zinit load paulmelnikow/zsh-startup-timer
+
+zinit snippet OMZ::plugins/autojump/autojump.plugin.zsh
+
+# Load a few important annexes, without Turbo
+# (this is currently required for annexes)
+zinit light-mode for \
+    zdharma-continuum/zinit-annex-as-monitor \
+    zdharma-continuum/zinit-annex-bin-gem-node \
+    zdharma-continuum/zinit-annex-patch-dl \
+    zdharma-continuum/zinit-annex-rust
+
+### End of Zinit's installer chunk
