@@ -177,7 +177,7 @@ zinit load zdharma/fast-syntax-highlighting
 # zinit ice silent wait; zinit light gretzky/auto-color-ls
 
 zinit ice as"program" pick"bin/git-dsf"
-zinit light z-shell/zsh-diff-so-fancy
+zinit light zdharma-continuum/zsh-diff-so-fancy
 
 zinit light zpm-zsh/colorize
 zinit light rutchkiwi/copyzshell
