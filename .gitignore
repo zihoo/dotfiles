@@ -4,6 +4,7 @@
 !.gitconfig
 !.gitignore
 !.gitinclude
-!.zshrc.osx
-!.zshrc.mds
 !.ssh/config
+!.zshrc.mds
+!.zshrc.osx
+!.zsh-dircolors.config
