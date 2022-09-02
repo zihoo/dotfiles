@@ -39,7 +39,7 @@
 [pull]
 	rebase = false
 [http "https://github.com"]
-	proxy = socks5://sslocal:1080
+	proxy = http://127.0.0.1:7890
 [alias]
 	a = add --all
 	ai = add --interactive
