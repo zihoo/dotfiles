@@ -4,5 +4,6 @@
 !.gitconfig
 !.gitignore
 !.gitinclude
-!.zshrc
+!.zshrc.osx
+!.zshrc.mds
 !.ssh/config
