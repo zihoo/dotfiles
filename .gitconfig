@@ -1,7 +1,7 @@
 [user]
-	name = huzhi
-	email = huzhi@mds-trading.com
-	username = huzhi
+	name = moby.huang
+	email = huanghuzhi@gmail.com
+	username = moby.huang
 [core]
 	editor = vim
 	excludesfile = ~/.gitignore
@@ -38,6 +38,8 @@
 	defaultBranch = master
 [pull]
 	rebase = false
+[push]
+	autoSetupRemote = true
 [http "https://github.com"]
 	proxy = http://127.0.0.1:7890
 [alias]
