@@ -1,5 +1,3 @@
-!.gitinclude
-
 ### Ansible
 *.retry
 
