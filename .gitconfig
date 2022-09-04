@@ -1,7 +1,7 @@
 [user]
-	name = moby.huang
-	email = huanghuzhi@gmail.com
-	username = moby.huang
+	name = huzhi
+	email = huzhi@mds-trading.com
+	username = huzhi
 [core]
 	editor = vim
 	excludesfile = ~/.gitignore
@@ -41,7 +41,7 @@
 [push]
 	autoSetupRemote = true
 [http "https://github.com"]
-	proxy = http://127.0.0.1:7890
+	proxy = socks5://sslocal:1080
 [alias]
 	a = add --all
 	ai = add --interactive
