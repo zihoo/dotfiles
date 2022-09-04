@@ -38,6 +38,8 @@
 	defaultBranch = master
 [pull]
 	rebase = false
+[push]
+	autoSetupRemote = true
 [http "https://github.com"]
 	proxy = http://127.0.0.1:7890
 [alias]
