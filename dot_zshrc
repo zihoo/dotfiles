@@ -124,7 +124,7 @@ export CFLAGS="-I/opt/homebrew/include -L/opt/homebrew/lib"
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 source "${HOME}/.aliases"
-source "${HOME}/.iterm/.iterm2_shell_integration.zsh"
+source "${HOME}/.iterm2/.iterm2_shell_integration.zsh"
 
 export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/bottles
 export HOMEBREW_NO_AUTO_UPDATE=true
