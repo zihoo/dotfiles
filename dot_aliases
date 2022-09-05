@@ -6,14 +6,13 @@ alias rm="rm -i"
 # ls command
 alias ls="ls --show-control-chars --color=auto --time-style=long-iso"
 alias l="ls -lhrt"
-alias l.="ls -d .*"
-alias la="ls -lhA"
+alias la="l -A"
+alias l.="l -d .*"
 alias lc="colorls -lrt --sd --gs --human-readable"
 
 # other commands
 alias g="git"
 alias t="tig"
-alias otr="omz theme use random"
 alias ping="ping -i0.2"
 alias grep="ggrep --color=auto"
 alias aria="aria2c --conf-path=$HOME/.aria2/aria2.conf -D"
